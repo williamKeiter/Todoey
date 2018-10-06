@@ -56,8 +56,20 @@ class TodoListViewController: UITableViewController {
     
     //Detects which row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print(itemArray[indexPath.row])
-        //code below removed the need for if else due to ! switching to opposite of .done
+        
+        
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    item.done = !item.done
+                }
+            } catch {
+                print("Error saving done status, \(error)")
+            }
+        }
+        
+        tableView.reloadData()
+        
         
 //        context.delete(itemArray[indexPath.row])
 //        itemArray.remove(at: indexPath.row)
