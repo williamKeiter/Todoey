@@ -28,7 +28,7 @@ class TodoListViewController: UITableViewController {
         
     }
 
-    //MARK: - TableView Datasource Methods
+//MARK: - TableView Datasource Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoItems?.count ?? 1
     }
@@ -52,7 +52,7 @@ class TodoListViewController: UITableViewController {
         return cell
     }
     
-    //MARK: - TabelView Delegate Methods
+//MARK: - TabelView Delegate Methods
     
     //Detects which row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -69,21 +69,12 @@ class TodoListViewController: UITableViewController {
         }
         
         tableView.reloadData()
-        
-        
-//        context.delete(itemArray[indexPath.row])
-//        itemArray.remove(at: indexPath.row)
-        
-//        todoItems[indexPath.row].done = !todoItems[indexPath.row].done
-//        
-//        saveItems()
-        
-        //animated flash of gray vs. steady gray color when row is selected
+
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
-    //MARK: - Add New Items
+//MARK: - Add New Items
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -93,18 +84,25 @@ class TodoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             //what will happen once the user clicks the add item button on UIAlert
-            //print(textField.text)
-            //Use of .append will add new text to the existing array
-            
+
+                        
             if let currentCategorgy = self.selectedCategory {
                 do {
                 try self.realm.write {
                     let newItem = Item()
                     newItem.title = textField.text!
+                    newItem.dateCreated = Date()
                     currentCategorgy.items.append(newItem)
                 }
                 } catch {
                     print("Error saving items, \(error)")
+                }
+                
+                func dateCreated() {
+                    let formatter = DateFormatter()
+                    formatter.dateStyle = .medium
+                    formatter.timeStyle = .medium
+                    
                 }
             }
             
@@ -121,7 +119,7 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK: - Model Manipulation Methods
+//MARK: - Model Manipulation Methods
     
 //    func saveItems() {
 //        do {
@@ -144,28 +142,23 @@ class TodoListViewController: UITableViewController {
 }
 //MARK: - Search Bar Methods
 
-//extension TodoListViewController: UISearchBarDelegate {
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        let request : NSFetchRequest<Item> =  Item.fetchRequest()
-//
-//        let predicate  = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-//
-//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-//
-//        loadItems(with : request, predicate: predicate)
-//
-//    }
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchBar.text?.count == 0 {
-//            loadItems()
-//
-//            DispatchQueue.main.async {
-//                searchBar.resignFirstResponder()
-//            }
-//
-//        }
-//    }
-//
-//}
+extension TodoListViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        todoItems = todoItems?.filter("title CONTINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
+
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+
+        }
+    }
+
+}

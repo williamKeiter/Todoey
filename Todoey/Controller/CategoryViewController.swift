@@ -94,14 +94,13 @@ class CategoryViewController: UITableViewController {
     //MARK: - Data Manipulation Methods
     
     
-    
-            func loadCategories() {
-                
-                categories = realm.objects(Category.self)
+        func loadCategories() {
+            
+            categories = realm.objects(Category.self)
 
-                tableView.reloadData()
-    
-            }
+            tableView.reloadData()
+
+        }
     
     func save(category: Category) {
     do {
