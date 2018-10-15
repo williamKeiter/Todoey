@@ -34,11 +34,7 @@ class CategoryViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-//        let category = categories[indexPath.row]
-        
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories added yet"
-        
-//        cell.accessoryType = category.done == true ? .checkmark : .none
         
         return cell
     }
@@ -93,13 +89,11 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - Data Manipulation Methods
     
-    
         func loadCategories() {
             
             categories = realm.objects(Category.self)
 
             tableView.reloadData()
-
         }
     
     func save(category: Category) {
@@ -114,7 +108,7 @@ class CategoryViewController: UITableViewController {
     tableView.reloadData()
     }
             
-    }
+}
 
     
 

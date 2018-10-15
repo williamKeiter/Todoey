@@ -121,17 +121,6 @@ class TodoListViewController: UITableViewController {
     
 //MARK: - Model Manipulation Methods
     
-//    func saveItems() {
-//        do {
-//            try context.save()
-//
-//        } catch {
-//            print("Error saving context, \(error)")
-//        }
-//
-//        tableView.reloadData()
-//    }
-//
     func loadItems() {
 
         todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
@@ -146,7 +135,7 @@ extension TodoListViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        todoItems = todoItems?.filter("title CONTINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
+        todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
 
     }
 
