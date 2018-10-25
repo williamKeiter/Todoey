@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: SwipeTableViewController {
 
     var todoItems: Results<Item>?
     let realm = try! Realm()
@@ -17,6 +17,8 @@ class TodoListViewController: UITableViewController {
     var selectedCategory : Category? {
         didSet{
             loadItems()
+            
+            
         }
     }
     
@@ -35,7 +37,9 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+//        cell.textLabel?.text = todoItems?[indexPath.row].name ?? "No Items added yet"
         
         if let item = todoItems?[indexPath.row] {
             
@@ -85,6 +89,7 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             //what will happen once the user clicks the add item button on UIAlert
 
+            
                         
             if let currentCategorgy = self.selectedCategory {
                 do {
@@ -127,6 +132,24 @@ class TodoListViewController: UITableViewController {
 
         tableView.reloadData()
     }
+    
+    //Mark: - Delete data from Swipe
+    
+    override func updateModel(at indexPath: IndexPath) {
+        
+        if let itemForDeletion = self.todoItems?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(itemForDeletion)
+                }
+            } catch{
+                print("Error deleting item, \(error)")
+            }
+        }
+//        tableView.reloadData()
+    }
+    
+    
     
 }
 //MARK: - Search Bar Methods

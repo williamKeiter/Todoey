@@ -14,6 +14,7 @@
 		375EAC342120F33B0061FDB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375EAC322120F33B0061FDB5 /* Main.storyboard */; };
 		375EAC362120F33C0061FDB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 375EAC352120F33C0061FDB5 /* Assets.xcassets */; };
 		375EAC392120F33C0061FDB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375EAC372120F33C0061FDB5 /* LaunchScreen.storyboard */; };
+		3778EEED21813C7A005A825B /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3778EEEC21813C7A005A825B /* SwipeTableViewController.swift */; };
 		37E1C0E6215DF2250020084F /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1C0E5215DF2250020084F /* CategoryViewController.swift */; };
 		B4B29D20FCE443BA3DC9A342 /* Pods_Todoey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 570BF17CBC13FA076C50B751 /* Pods_Todoey.framework */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		375EAC352120F33C0061FDB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		375EAC382120F33C0061FDB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		375EAC3A2120F33C0061FDB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3778EEEC21813C7A005A825B /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		37E1C0E5215DF2250020084F /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		570BF17CBC13FA076C50B751 /* Pods_Todoey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todoey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CCFB13705365304346AB0BB /* Pods-Todoey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todoey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Todoey/Pods-Todoey.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				37E1C0E5215DF2250020084F /* CategoryViewController.swift */,
 				375EAC302120F33B0061FDB5 /* TodoListViewController.swift */,
+				3778EEEC21813C7A005A825B /* SwipeTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -225,11 +228,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -247,6 +252,7 @@
 				37E1C0E6215DF2250020084F /* CategoryViewController.swift in Sources */,
 				375EAC312120F33B0061FDB5 /* TodoListViewController.swift in Sources */,
 				37509D1B21646DCF007AE019 /* Category.swift in Sources */,
+				3778EEED21813C7A005A825B /* SwipeTableViewController.swift in Sources */,
 				375EAC2F2120F33B0061FDB5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,7 +411,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.williamkeiter.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -425,7 +431,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.williamkeiter.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
