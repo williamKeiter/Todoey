@@ -38,9 +38,20 @@ class CategoryViewController: SwipeTableViewController {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories added yet"
+        if let category = categories?[indexPath.row] {
+            
+            cell.textLabel?.text = category.name
+            
+            guard let categoryColor = UIColor(hexString: category.color) else {
+                fatalError()
+            }
+            
+            cell.backgroundColor = categoryColor
+            
+            cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+        }
         
-        cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].color ?? "25A4FE")
+        
         
 //        print(cell.backgroundColor?.hexValue() as Any)
         //take hex value and assign to array for cell and persist in realm?
